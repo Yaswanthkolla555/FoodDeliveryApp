@@ -7,7 +7,7 @@ const Header = () => {
                 <h4>
                     "Indulge in your culinary desires and place your order for your favorite dish now!"</h4>
                 <p>Explore our diverse menu, meticulously curated with a tantalizing selection of dishes crafted from the finest ingredients, each aimed at satisfying your cravings and enhancing your dining experience, one delicious meal at a time. Choose your culinary journey here!</p>
-                <button>View Menu</button>
+                <a href="#menu-list" className='buttoncss'>View Menu</a>
             </div>
 
         </div>

@@ -28,7 +28,12 @@
     font-size: 1vw;
     font-weight: 500;
 }
-.header-content button{
+.header-content a{
+    text-decoration: none;
+    color: inherit;
+}
+.buttoncss{
+    background-color: rgb(233, 227, 227);
     border: none;
     color: black;
     font-size: max(1vw,11px);
@@ -36,6 +41,8 @@
     padding: 1vw 1.5vw;
     border-radius: 35px;
 }
+
+
 @media (max-width:1050px) {
 
     .header-content{
@@ -49,7 +56,7 @@
     .header-content p{
         display: none;
     } 
-    .header-content button{
+    .buttoncss{
         padding: 1.5vw 2vw;
         
     }

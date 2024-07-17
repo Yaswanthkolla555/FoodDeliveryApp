@@ -1,9 +1,15 @@
 .navbar{
-    padding: 20px 0px;
+    padding: 10px 0px;
+    padding-bottom: 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white; */
 }
+
 .navbar .logo{
     color: orangered;
     font-size: 30px;
@@ -101,7 +107,10 @@
     font-size: 12px;
     cursor: pointer;
 }
-
+.navbar a{
+    text-decoration: none;
+    color: inherit;
+}
 @media (max-width:1050px) {
     .navbar .logo{
         width: 140px;

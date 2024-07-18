@@ -22,6 +22,7 @@
     font-weight: 700;
     color: white;
     font-size: max(2.5vw,20px);
+    position: relative;
 }
 .header-content p{
     color: white;
@@ -57,7 +58,15 @@
         display: none;
     } 
     .buttoncss{
-        padding: 1.5vw 2vw;
-        
+        padding: 1.5vw 2vw;      
     }
+}
+@media (max-width:470px) {
+    .header-content{
+        max-width: 50%;
+    } 
+    .header-content h4{
+        /* display: none; */
+        font-size: 15px;
+    } 
 }

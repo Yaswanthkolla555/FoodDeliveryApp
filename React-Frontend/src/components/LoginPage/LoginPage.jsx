@@ -6,7 +6,7 @@ import './LoginPage.css';
 
 const LoginPage = (props) => {
     const [currState, setCurrState] = useState("Sign Up");
-    const { url, setIsLoggedIn, setUser } = useContext(StoreContext);
+    const { url, setIsLoggedIn, setUser,setToken } = useContext(StoreContext);
     const [data, setData] = useState({
         username: "",
         email: "",
@@ -25,10 +25,11 @@ const LoginPage = (props) => {
             const response = await axios.post(new_url, data);
             if (response.data.success) {
                 // alert(response.data.message);
+                setToken(response.data.token)
                 props.setShowLogin(false);
                 setIsLoggedIn(true);
                 setUser(response.data.user);
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+                localStorage.setItem("token",response.data.token);
             } else {
                 alert(response.data.message);
             }

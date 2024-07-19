@@ -4,17 +4,11 @@ import express from "express"
 
 // add items to usercart
 const addToCart = async (req,res)=>{
-    // const authenticatedUser = req.user;
-    // const itemId = req.body.itemId;
     const userId=req.body.userId
-
-    // if (!itemId ) {
-    //     return res.status(400).json({ success: false, message: "User ID and Item ID are required" });
-    // }
         try {
             let userData=await userModel.findById(userId)
             if (!userData) {
-                console.log(userData)
+                // console.log(userData)
                 return res.status(404).json({ success: false, message: "User not found" });
             }
             let cartData= userData.cartData

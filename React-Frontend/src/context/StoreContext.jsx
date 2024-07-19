@@ -8,6 +8,7 @@ const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [token,setToken]=useState("")
     const url = "http://localhost:4000";
         // uncomment when there is data of food present in databae-->used to fetch the data from db
         // and we can remove the food_list compoent form assets
@@ -59,51 +60,23 @@ const StoreContextProvider = (props) => {
         return totalAmount;
     };
 
-    const loadUserFromStorage = () => {
-        console.log("Loading user from localStorage...");
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setIsLoggedIn(true);
-            setUser(parsedUser);
-            console.log("User loaded from localStorage:", parsedUser);
-        } else {
-            console.log("No user found in localStorage.");
-        }
-    };
-    
 
-    const checkAuth = async () => {
-        console.log("Checking authentication status...");
-        try {
-            const response = await axios.get(url + "/api/user/profile",{ withCredentials: true });
-            console.log("Response from /api/user/profile:", response.data);
-            if (response.data.user) {
-                setIsLoggedIn(true);
-                setUser(response.data.user);
-                // localStorage.setItem('user', JSON.stringify(response.data.user));
-            } else {
-                setIsLoggedIn(false);
-                setUser(null);
-                localStorage.removeItem('user'); 
-            }
-        } catch (error) {
-            setIsLoggedIn(false);
-            setUser(null);
-            localStorage.removeItem('user');
-        }
-    };
+
+
 
     const logout = () => {
         setIsLoggedIn(false);
-        setUser(null);
-        localStorage.removeItem('user');
+        // setUser(null);
+        localStorage.removeItem('token');
         console.log("User logged out and localStorage cleared.");
     };
 
     useEffect(() => {
-        loadUserFromStorage();
-        checkAuth();
+
+        if(localStorage.getItem("token")){
+            setToken(localStorage.getItem("token"));
+        }
+
         // uncomment when there is data of food present in databae-->used to fetch the data from db
         // async function loadData(){
         //     await fetchFoodList();
@@ -123,7 +96,9 @@ const StoreContextProvider = (props) => {
         setIsLoggedIn,
         user,
         setUser,
-        logout, 
+        logout,
+        token,
+        setToken,
     };
 
     return (

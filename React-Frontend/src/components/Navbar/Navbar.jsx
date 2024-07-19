@@ -5,9 +5,11 @@ import { assets } from '../../assets/assets';
 import './Navbar.css';
 
 const Navbar = (props) => {
-    const { getTotalCartAmount, isLoggedIn, logout } = useContext(StoreContext);
+    const { getTotalCartAmount, isLoggedIn, logout,setToken,token } = useContext(StoreContext);
     const [menu,setMenu]=useState("home")
     const handleLogOut = () => {
+        localStorage.removeItem("token")
+        setToken("")
         logout();
     };
 
@@ -26,7 +28,7 @@ const Navbar = (props) => {
                     <Link to="/cart"><img src={assets.basket_icon} alt="Cart" /></Link>
                     <div className={getTotalCartAmount() > 0 ? "dot" : ""}></div>
                 </div>
-                {!isLoggedIn ?
+                {!token ?
                     <button onClick={() => props.setShowLogin(true)}>Sign In</button>
                     :
                     <div className='navbar-profile'>

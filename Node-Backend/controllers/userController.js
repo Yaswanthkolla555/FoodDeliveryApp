@@ -1,7 +1,7 @@
 import userModel from "../models/userModel.js";
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-
+import jwt from "jsonwebtoken"
 passport.use(new LocalStrategy(userModel.authenticate()));
 
 passport.serializeUser((user, done) => {
@@ -18,6 +18,11 @@ const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 };
+
+// creating webtoken
+const createToken=(id)=>{
+    return jwt.sign({id},process.env.JWT_SECRET)
+}
 
 const registerUser = async (req, res) => {
     const { username, password, email } = req.body;
@@ -38,11 +43,25 @@ const registerUser = async (req, res) => {
                 email: email
             });
 
-            await userModel.register(newUser, password);
-            
-            // Authenticate user after registration
-            passport.authenticate('local')(req, res, function () {
-                return res.json({ success: true, message: 'Registration successful' });
+            userModel.register(newUser, password, async (err, user) => {
+                if (err) {
+                    console.error('Registration Error:', err);
+                    return res.json({ success: false, message: "Registration failed", error: err });
+                }
+
+                try {
+                    // jwttoken usage
+                    const savedUser = await user.save();
+                    const token = createToken(savedUser._id);
+
+                    // Authenticate user after registration
+                    passport.authenticate('local', { session: false })(req, res, function () {
+                        return res.json({ success: true, message: 'Registration successful', token });
+                    });
+                } catch (saveErr) {
+                    console.error('Save User Error:', saveErr);
+                    return res.json({ success: false, message: "Failed to save user", error: saveErr });
+                }
             });
         }
     } catch (error) {
@@ -66,7 +85,8 @@ const loginUser = async (req, res,next) => {
                 console.error('Login error:', err);
                 return res.json({ success: false, message: "Login failed", error: err });
             }
-            return res.json({ success: true, message: "Login successful", user: user });
+            const token=createToken(user._id);
+            return res.json({ success: true, message: "Login successful", user: user,token });
         });
     })(req, res, next);
 };

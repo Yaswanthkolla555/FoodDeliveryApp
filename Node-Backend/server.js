@@ -96,23 +96,15 @@ import express from "express";
 import cors from "cors";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
+import cartRouter from "./routes/cartRoute.js";
 import expressSession from "express-session";
 import passport from "passport";
-import cartRouter from "./routes/cartRoute.js";
-import MongoStore from "connect-mongo";
-import mongoose from "mongoose";
 import authMiddleware from "../Node-Backend/middleware/auth.js";
-
+// for webtoken
+import "dotenv/config"
 const app = express();
 const port = 4000;
 
-// MongoDB connection setup with Mongoose
-mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
 
 // Middleware setup
 app.use(express.json());
@@ -120,31 +112,14 @@ app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 }));
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 // Session configuration with MongoStore
 app.use(expressSession({
-  secret: 'anything',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: "mongodb://127.0.0.1:27017/FOODDELIVERYAPP", // MongoDB connection URL
-    collectionName: "sessions", // Optional, specify the collection name for sessions
-    ttl: 24 * 60 * 60, // Optional, session TTL (time to live) in seconds
-    autoRemove: "interval",
-    autoRemoveInterval: 10, // Optional, interval in seconds to clear expired sessions
-    crypto: {
-      secret: "anything", // Optional, encryption secret
-    },
-    mongoOptions: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-  }),
-  cookie: {
-    secure: false,
-    maxAge: 24 * 60 * 60 * 1000 // 1 day
-  }
+  secret: "Anything",
+  cookie: { secure: false }
 }));
 
 // Passport initialization

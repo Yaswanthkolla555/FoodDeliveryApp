@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { food_list } from "../assets/assets";
+// import { food_list } from "../assets/assets";
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 export const StoreContext = createContext("null");
@@ -12,13 +15,16 @@ const StoreContextProvider = (props) => {
     const url = "http://localhost:4000";
         // uncomment when there is data of food present in databae-->used to fetch the data from db
         // and we can remove the food_list compoent form assets
-    // const [food_list,setFoodList]=useState([])
-    // const fetchFoodList=async()=>{
-    //     const response=await axios.get(url+"/api/food/list")
-    //     setFoodList(response.data.data)  
-    // }
+    const [food_list,setFoodList]=useState([])
+    const fetchFoodList=async()=>{
+        const response=await axios.get(url+"/api/food/list")
+        console.log(response);
+        setFoodList(response.data.data)  
+    }
+
+    const notify=()=>toast.warning("You Need to Login First");
     const addToCart = async (itemId) => {
-        if (isLoggedIn) {
+        if (localStorage.getItem("token")) {
             try {
                 await axios.post(url + "/api/cart/add", { itemId }, { withCredentials: true });
                         if (!cartItems[itemId]) {
@@ -30,14 +36,15 @@ const StoreContextProvider = (props) => {
                 console.error('Error adding to cart:', error);
             }
         }
-         else {
+        else {
+            notify();
             console.log("User is not logged in");
         }
     };
 
 
     const removeFromCart = async (itemId) => {
-        if (isLoggedIn) {
+        if (localStorage.getItem("token")) {
             try {
                 await axios.post(url + "/api/cart/remove", { itemId }, { withCredentials: true });
                 setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
@@ -69,6 +76,7 @@ const StoreContextProvider = (props) => {
         // setUser(null);
         localStorage.removeItem('token');
         console.log("User logged out and localStorage cleared.");
+        setCartItems({});       
     };
 
     useEffect(() => {
@@ -78,10 +86,10 @@ const StoreContextProvider = (props) => {
         }
 
         // uncomment when there is data of food present in databae-->used to fetch the data from db
-        // async function loadData(){
-        //     await fetchFoodList();
-        // }
-        // loadData();
+        async function loadData(){
+            await fetchFoodList();
+        }
+        loadData();
     }, []); 
 
     const contextValue = {

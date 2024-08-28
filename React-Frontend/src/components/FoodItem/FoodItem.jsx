@@ -9,9 +9,9 @@ const FoodItem = (props) => {
   return (
     <div className='food-item'>
       <div className="food-item-img-container">
-        <img src={props.image} alt="" className="food-item-img" />
+        {/* <img src={props.image} alt="" className="food-item-img" /> */}
         {/* to get images form data base */}
-        {/* <img src={url+"/images/"+props.image} alt="" className="food-item-img" /> */}
+        <img src={url+"/images/"+props.image} alt="" className="food-item-img" />
         {
           !cartItems[props.id] ? <img onClick={() => addToCart(props.id)} src={assets.add_icon_white} alt="" className="add" />
             : <div className="food-item-counter">

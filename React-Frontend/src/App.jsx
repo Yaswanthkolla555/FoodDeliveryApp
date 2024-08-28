@@ -7,6 +7,8 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder"
 import Footer from './components/Footer/Footer'
 import LoginPage from './components/LoginPage/LoginPage'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
   return (
@@ -21,6 +23,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
+      <ToastContainer/>
     </>
   )
 }

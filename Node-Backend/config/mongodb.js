@@ -1,2 +1,33 @@
+
+
+// For adding food data to mongodb from assest.js
+
 // import mongoose from "mongoose";
-// mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP").then(()=>{console.log("mongodb connected")})
+// import { food_list } from "../../React-Frontend/src/assets/assets.js";
+
+// import foodModel from "../models/foodModel.js";
+// mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP");
+
+
+// const foodDb = async () => {
+//   try {
+//     await foodModel.deleteMany({});
+//     for (let i = 0; i < food_list.length; i++) {
+//         const newFood = new foodModel({
+//           name: food_list[i].name,
+//           description: food_list[i].description,
+//           price: Number(food_list[i].price),
+//           image: food_list[i].image,
+//           category: food_list[i].category
+//         });
+//         await newFood.save();
+//       }
+//     console.log("Database population completed.");
+//   } catch (err) {
+//     console.error("Error populating the database:", err);
+//   } finally {
+//     mongoose.connection.close();
+//     console.log("MongoDB connection closed.");
+//   }
+// };
+// foodDb();

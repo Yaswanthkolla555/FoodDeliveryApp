@@ -100,6 +100,7 @@ import cartRouter from "./routes/cartRoute.js";
 import expressSession from "express-session";
 import passport from "passport";
 import authMiddleware from "../Node-Backend/middleware/auth.js";
+import orderRouter from "./routes/orderRoute.js";
 // for webtoken
 import "dotenv/config"
 const app = express();
@@ -141,6 +142,7 @@ app.use("/api/food", foodRouter);
 app.use("/images", express.static('uploads'));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/order",orderRouter);
 
 // Default route
 app.get("/", (req, res) => {

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 import { assets } from '../../assets/assets';
 import './Navbar.css';
@@ -12,10 +12,10 @@ const Navbar = (props) => {
         setToken("")
         logout();
     };
-
+const navigate=useNavigate();
     return (
-        <div className='navbar' style={{width:"100%"}}>
-            <h3 className="logo">Swiggato</h3>
+        <div  className='navbar' style={{width:"100%"}}>
+            <Link to='/' onClick={()=>{setMenu("home")}} className="logo">Swiggato</Link>
             <ul className="navbar-menu">
                 <Link to='/' onClick={()=>{setMenu("home")}} className={menu=="home"?"active":""}>Home</Link>
                 <a href='#menu-list' onClick={()=>{setMenu("menu")}} className={menu=="menu"?"active":""}>Menu</a>
@@ -34,7 +34,7 @@ const Navbar = (props) => {
                     <div className='navbar-profile'>
                         <img src={assets.profile_icon} alt="Profile" />
                         <ul className="navbar-profile-dropdown">
-                            <li><img src={assets.bag_icon} alt="Orders" /><div>Orders</div></li>
+                            <li onClick={()=>navigate('/myorders')}><img src={assets.bag_icon} alt="Orders" /><div>Orders</div></li>
                             <hr />
                             <li onClick={handleLogOut}><img src={assets.logout_icon} alt="Logout" /><div>Logout</div></li>
                         </ul>

@@ -13,6 +13,7 @@
 .navbar .logo{
     color: orangered;
     font-size: 30px;
+    cursor: pointer;
 }
 .navbar-menu{
     list-style: none;

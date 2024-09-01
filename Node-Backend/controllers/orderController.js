@@ -3,6 +3,7 @@ import userModel from "../models/userModel.js"
 import Stripe from "stripe"
 // to access dotenv file
 import dotenv from 'dotenv'
+import { response } from "express";
 dotenv.config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -78,4 +79,41 @@ const verifyOrder =async (req,res)=>{
        res.json({success:false,message:"Error"})
     }
 }
-export {placeOrder,verifyOrder}
+
+// users order for frontend-->we are connecting backend data to frontend
+const userOrders=async (req,res)=>{
+    try {
+        // we will get the userId from the middleware
+        const orders=await orderModel.find({userId:req.body.userId})
+        res.json({success:true,data:orders});
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:"Error"});
+        
+    }
+
+}
+// getting list of all orders for admin panel
+const listOrders=async (req,res)=>{
+    try {
+        const orders=await orderModel.find({});
+        res.json({success:true,data:orders})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:"Error"})
+        
+    }
+}
+
+// api for updating order status from admin panel
+const updateStatus =async (req,res)=>{
+    try {
+        await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
+        res.json({success:true,message:"Status updated"})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:"Error"})
+        
+    }
+}
+export {placeOrder,verifyOrder,userOrders,listOrders,updateStatus}

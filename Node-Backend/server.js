@@ -113,7 +113,8 @@ const port =process.env.PORT||  4000;
 // Middleware setup
 app.use(express.json());
 app.use(cors({
-  // origin: 'http://localhost:5173',
+  origin: 'https://fooddeliveryapp-frontend-oh6b.onrender.com',
+  // https://fooddeliveryapp-frontend-oh6b.onrender.com
   credentials: true
 }));
 // app.use(express.urlencoded({ extended: true }));

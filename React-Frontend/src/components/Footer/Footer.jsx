@@ -27,7 +27,7 @@ const Footer = () => {
                     <h3>Get In Touch</h3>
                     <ul>
                         <li>+91-9515875899</li>
-                        <li>contact@swiaggato.com</li>
+                        <li>contact@swiggato.com</li>
                     </ul>
             </div>
         </div>

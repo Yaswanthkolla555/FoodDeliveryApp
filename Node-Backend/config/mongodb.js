@@ -38,7 +38,7 @@
 import mongoose from "mongoose"
 
 export const connectDb=async ()=>{
-    await mongoose.connect("mongodb+srv://Yaswanth:Qwertycom123@cluster0.vde3x.mongodb.net/FOODDELIVERYAPP").then(()=>console.log("Db Connected"))  
+    await mongoose.connect(process.env.MONGO_CONNECTION_SECRET).then(()=>console.log("Db Connected"))  
 }
 
 // import { food_list } from "../../React-Frontend/src/assets/assets.js";

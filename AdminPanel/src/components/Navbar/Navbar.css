@@ -14,3 +14,9 @@
     opacity: 0.6;
     font-size: smaller;
 }
+.profile{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+
+}

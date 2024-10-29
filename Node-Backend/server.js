@@ -101,8 +101,11 @@ import expressSession from "express-session";
 import passport from "passport";
 import authMiddleware from "../Node-Backend/middleware/auth.js";
 import orderRouter from "./routes/orderRoute.js";
+import { connectDb } from "./config/mongodb.js";
+// import foodDb from "./config/mongodb.js";
 // for webtoken
 import "dotenv/config"
+
 const app = express();
 const port = 4000;
 
@@ -115,6 +118,8 @@ app.use(cors({
 }));
 // app.use(express.urlencoded({ extended: true }));
 
+// setup for db connection
+connectDb();
 // Session configuration with MongoStore
 app.use(expressSession({
   resave: false,
@@ -143,7 +148,7 @@ app.use("/images", express.static('uploads'));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order",orderRouter);
-
+// foodDb()
 // Default route
 app.get("/", (req, res) => {
   res.send("API Working");

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP");
+// mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP");
 
 const foodSchema=new mongoose.Schema({
     name:{

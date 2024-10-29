@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import plm from "passport-local-mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP");
+// mongoose.connect("mongodb://127.0.0.1:27017/FOODDELIVERYAPP");
 
 const userSchema = new mongoose.Schema({
     username: { 
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     secret:{
         type:String,
-    },
+    }, 
     cartData: {
         type: Object,
         default: {},

@@ -77,3 +77,14 @@ transform: scale(1.01) ;
     border-radius: 50px;
     background-color: white;  
 }
+
+@media (max-width:750px) {
+    .food-item{
+        width: 90%;
+    }
+}
+@media (max-width:600px) {
+    .food-item{
+        width: 60%;
+    }
+}

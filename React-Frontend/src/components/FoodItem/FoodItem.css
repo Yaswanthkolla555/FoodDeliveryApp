@@ -85,6 +85,6 @@ transform: scale(1.01) ;
 }
 @media (max-width:600px) {
     .food-item{
-        width: 60%;
+        width: 75%;
     }
 }

@@ -65,8 +65,12 @@
     .header-content{
         max-width: 50%;
     } 
-    .header-content h4{
+     .header-content h4{
         /* display: none; */
-        font-size: 15px;
+        font-size: 13px;
     } 
+    .buttoncss{
+        padding: 0.8vw 1.3vw;
+        font-size: 10px;
+    }
 }

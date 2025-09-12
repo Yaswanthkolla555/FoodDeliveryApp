@@ -12,6 +12,7 @@ const Navbar = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+
     const foods=food_list;
     const handleSearch = () => {
         setShowSearch(!showSearch);
@@ -54,6 +55,7 @@ const Navbar = (props) => {
         setToken("")
         logout();
     };
+    
     return (
         <div  className='navbar' style={{width:"100%"}}>
             <Link to='/' onClick={()=>{setMenu("home")}} className="logo">Swiggato</Link>
@@ -89,10 +91,12 @@ const Navbar = (props) => {
                         )}
                     </div>
                 )}
-                <div className="navbar-search-icon">
-                    <Link to="/cart"><img src={assets.basket_icon} alt="Cart" /></Link>
-                    <div className={getTotalCartAmount() > 0 ? "dot" : ""}></div>
-                </div>
+                {token?
+                    <div className="navbar-search-icon">
+                        <Link to="/cart"><img src={assets.basket_icon} alt="Cart" /></Link>
+                        <div className={getTotalCartAmount() > 0 ? "dot" : ""}></div>
+                    </div>:null
+                }
                 {!token ?
                     <button onClick={() => props.setShowLogin(true)}>Sign In</button>
                     :

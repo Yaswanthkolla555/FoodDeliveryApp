@@ -43,9 +43,7 @@
     border-radius: 35px;
 }
 
-
 @media (max-width:1050px) {
-
     .header-content{
         max-width: 45%;
     }  
@@ -62,8 +60,12 @@
     }
 }
 @media (max-width:470px) {
+    .header{
+        height: 10rem;
+    }
     .header-content{
-        max-width: 50%;
+        padding-top: 0;
+        max-width: 40%;
     } 
      .header-content h4{
         /* display: none; */

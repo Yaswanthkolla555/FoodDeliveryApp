@@ -112,7 +112,7 @@ const port =process.env.PORT||  4000;
 
 // Middleware setup
 app.use(express.json());
-const allowedOrigins=["https://fooddeliveryapp-admin-5fn3.onrender.com", 'https://fooddeliveryapp-frontend-oh6b.onrender.com'];
+const allowedOrigins=["http://localhost:5173","https://fooddeliveryapp-admin-5fn3.onrender.com", 'https://fooddeliveryapp-frontend-oh6b.onrender.com'];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {

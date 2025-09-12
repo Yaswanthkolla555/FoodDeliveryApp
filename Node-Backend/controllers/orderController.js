@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const placeOrder=async (req,res)=>{
 
-    const frontend_url="http://localhost:5173"
+    const frontend_url="https://fooddeliveryapp-frontend-oh6b.onrender.com"
     try {
         const newOrder=new orderModel({
             // we will get the id from auth middleware

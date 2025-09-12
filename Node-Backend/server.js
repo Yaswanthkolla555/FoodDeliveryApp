@@ -107,13 +107,22 @@ import { connectDb } from "./config/mongodb.js";
 import "dotenv/config"
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port =process.env.PORT||  4000;
 
 
 // Middleware setup
 app.use(express.json());
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+// const allowedOrigins=["https://fooddeliveryapp-admin-5fn3.onrender.com", 'https://fooddeliveryapp-frontend-oh6b.onrender.com'];
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  // https://fooddeliveryapp-frontend-oh6b.onrender.com
   credentials: true
 }));
 // app.use(express.urlencoded({ extended: true }));

@@ -7,17 +7,24 @@ const Footer = () => {
         <div className="footer-content">
             <div className="footer-content-left">
             <h3 className="logo">Swiggato</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis atque reprehenderit saepe repellat ad, odio, quaerat adipisci molestiae accusamus mollitia exercitationem tenetur unde?</p>
+            <p>Your one-stop food delivery solution bringing delicious meals straight to your doorstep.  
+            Fast, reliable, and convenient - order your favorite dishes anytime, anywhere. </p>
             <div className="footer-social-icons">
+                <a 
+                    href="https://www.linkedin.com/in/yaswanth-kolla-48a66b274/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    >
+                    <img src={assets.linkedin_icon} alt="LinkedIn" />
+                </a>
                 <img src={assets.facebook_icon} alt="" />
                 <img src={assets.twitter_icon} alt="" />
-                <img src={assets.linkedin_icon} alt="" />
             </div>
             </div>
             <div className="footer-content-center">
                     <h3>Company</h3>
                     <ul>
-                        <li>Home</li>
+                       <li>Home</li>
                         <li>AboutUs</li>
                         <li>Delivery</li>
                         <li>Privacy Policy</li>
@@ -26,8 +33,8 @@ const Footer = () => {
             <div className="footer-content-right">
                     <h3>Get In Touch</h3>
                     <ul>
-                        <li>+91-9515875899</li>
-                        <li>contact@swiggato.com</li>
+                        <li>+91-9876543210</li>
+                        <li>kollayaswanth555@gmail.com</li>
                     </ul>
             </div>
         </div>

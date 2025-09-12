@@ -7,12 +7,53 @@ import './Navbar.css';
 const Navbar = (props) => {
     const { getTotalCartAmount, isLoggedIn, logout,setToken,token } = useContext(StoreContext);
     const [menu,setMenu]=useState("home")
+    const navigate=useNavigate();
+    const { food_list } = useContext(StoreContext)
+    const [showSearch, setShowSearch] = useState(false);
+    const [query, setQuery] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const foods=food_list;
+    const handleSearch = () => {
+        setShowSearch(!showSearch);
+        // console.log(food_list);     
+    };
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setQuery(value);
+      
+        if (value.trim() === "") {
+          setSuggestions([]);
+          return;
+        }  
+        // split input into words like ["rolls", "paneer"]
+        const queryWords = value.toLowerCase().split(" ").filter(Boolean);
+      
+        const filtered = foods.filter((item) => {
+          const name = item.name.toLowerCase();
+          // check if every query word exists in the name
+          return queryWords.every((word) => name.includes(word));
+        }).slice(0, 3);
+      
+        setSuggestions(filtered);
+      };
+      
+      const handleNavigate = (slug) => {
+        // console.log(slug);
+        
+        props.setSearchName(slug);  
+        setShowSearch(false);
+        setQuery("");
+        setSuggestions([]);
+        navigate("/");
+        setTimeout(() => {
+            props.setSearchName("");
+          }, 6000);
+      };
     const handleLogOut = () => {
         localStorage.removeItem("token")
         setToken("")
         logout();
     };
-const navigate=useNavigate();
     return (
         <div  className='navbar' style={{width:"100%"}}>
             <Link to='/' onClick={()=>{setMenu("home")}} className="logo">Swiggato</Link>
@@ -23,7 +64,31 @@ const navigate=useNavigate();
                 <a href='#footer' onClick={()=>{setMenu("contact-us")}} className={menu=="contact-us"?"active":""}>Contact Us</a>
             </ul>
             <div className="navbar-right">
-                <img className='search-icon' src={assets.search_icon} alt="Search" />
+                <img onClick={handleSearch} className='search-icon' src={assets.search_icon} alt="Search" />
+                {showSearch && (
+                    <div className="search-box">
+                        <input
+                            type="text"
+                            value={query}
+                            onChange={handleChange}
+                            placeholder="Search food..."
+                            className="search-input"
+                        />
+                        {suggestions.length > 0 && (
+                            <ul className="suggestion-list">
+                                {suggestions.map((item, idx) => (
+                                    <li
+                                        key={idx}
+                                        onClick={() => handleNavigate(item.name)}
+                                        className="suggestion-item"
+                                    >
+                                        {item.name}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                )}
                 <div className="navbar-search-icon">
                     <Link to="/cart"><img src={assets.basket_icon} alt="Cart" /></Link>
                     <div className={getTotalCartAmount() > 0 ? "dot" : ""}></div>

@@ -77,7 +77,11 @@ transform: scale(1.01) ;
     border-radius: 50px;
     background-color: white;  
 }
-
+@media (max-width:1050px) {
+    .food-item{
+        width: 85%;
+    }
+}
 
 @media (max-width:750px) {
     .food-item{
@@ -86,6 +90,6 @@ transform: scale(1.01) ;
 }
 @media (max-width:600px) {
     .food-item{
-        width: 60%;
+        width: 75%;
     }
 }

@@ -5,6 +5,7 @@
     gap: 50px;
     margin-top:80px ;
 }
+
 .placeorder-left{
     width: 100%;
     max-width: max(30%,450px);
@@ -35,4 +36,16 @@ max-width: max(40%,500px);
 }
 .cart-total-details b{
     color: black;
+}
+
+@media (max-width:600px) {
+    .placeorder {
+        flex-direction: column; 
+        gap: 30px; 
+    }
+
+    .placeorder-left,.placeorder-right {
+        max-width: 100%; 
+        width: 100%;
+    }
 }

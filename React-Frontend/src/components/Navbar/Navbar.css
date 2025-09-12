@@ -134,7 +134,7 @@
     align-items: center;
     justify-content: center;
   }
-.navbar-profile{
+/* .navbar-profile{
     position: relative;
     cursor: pointer;
 }
@@ -164,12 +164,6 @@
 .navbar-profile-dropdown li:hover{
     color: orangered;
 }
-/* .navbar-profile-dropdown hr{
-        height: 10px;
-        background-color: black;
-        border: none;
-        z-index: 10;
-} */
 .navbar-profile-dropdown li{
     display: flex;
     align-items: center;
@@ -179,7 +173,66 @@
     gap: 10px;
     font-size: 12px;
     cursor: pointer;
+} */
+.navbar-profile {
+  position: relative;
+  cursor: pointer;
 }
+
+.navbar-profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%; 
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #fff2ef;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid orangered;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  list-style: none;
+  min-width: 120px;
+}
+
+.navbar-profile:hover .navbar-profile-dropdown {
+  display: flex;
+}
+
+.navbar-profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 13px;
+  color: black;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 4px;
+}
+
+/* Item hover effect */
+.navbar-profile-dropdown li:hover {
+  color: orangered;
+  background-color: #ffe5dc;
+}
+
+/* Dropdown icons */
+.navbar-profile-dropdown img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Optional: divider */
+.navbar-profile-dropdown hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 4px 0;
+}
+
 .navbar a{
     text-decoration: none;
     color: inherit;

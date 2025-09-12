@@ -68,6 +68,7 @@ const placeOrder=async (event)=>{
 }
   return (
     <form onSubmit={placeOrder} className="placeorder">
+      {/* <div className="placeorder-box"> */}
       <div className="placeorder-left">
           <p className="title">Delivery Information</p>
           {/* to get data from from and storing those values in state variable data */}
@@ -109,6 +110,7 @@ const placeOrder=async (event)=>{
           </div>
         </div>
       </div>
+    {/* </div> */}
     </form>
   )
 }
